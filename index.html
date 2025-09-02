@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>975 Goles de Cristiano Ronaldo | Todos los Goles de CR7 en Video</title>
+    <meta name="description" content="Descubre los 975 goles de Cristiano Ronaldo en video. Filtra por equipo, fecha, minuto y parte del cuerpo. La colección más completa de goles de CR7.">
+    <meta name="keywords" content="Cristiano Ronaldo, goles, CR7, 975 goles, Real Madrid, Manchester United, Juventus, Portugal, videos goles">
+    <meta name="author" content="Especiales Deportivos">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tudominio.com/975-goles-cristiano-ronaldo">
+    <meta property="og:title" content="975 Goles de Cristiano Ronaldo | La Colección Completa">
+    <meta property="og:description" content="Revive todos los goles de Cristiano Ronaldo desde 2002. Videos, estadísticas y filtros avanzados de los 975 goles de CR7.">
+    <meta property="og:image" content="https://tudominio.com/images/cr7-975-goles.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tudominio.com/975-goles-cristiano-ronaldo">
+    <meta property="twitter:title" content="975 Goles de Cristiano Ronaldo | La Colección Completa">
+    <meta property="twitter:description" content="Revive todos los goles de Cristiano Ronaldo desde 2002. Videos, estadísticas y filtros avanzados.">
+    <meta property="twitter:image" content="https://tudominio.com/images/cr7-975-goles.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tudominio.com/975-goles-cristiano-ronaldo">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "975 Goles de Cristiano Ronaldo",
+        "description": "La colección completa de los 975 goles de Cristiano Ronaldo en video, con filtros por equipo, fecha y estadísticas.",
+        "url": "https://tudominio.com/975-goles-cristiano-ronaldo",
+        "about": {
+            "@type": "Person",
+            "name": "Cristiano Ronaldo",
+            "alternateName": "CR7",
+            "description": "Futbolista profesional portugués",
+            "birthDate": "1985-02-05",
+            "nationality": "Portugal"
+        },
+        "mainEntity": {
+            "@type": "VideoObject",
+            "name": "Colección de 975 Goles de Cristiano Ronaldo",
+            "description": "Videos de todos los goles oficiales de Cristiano Ronaldo desde 2002",
+            "uploadDate": "2024-01-01"
+        }
+    }
+    </script>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" as="style">
+    <link rel="preconnect" href="https://sheets.googleapis.com">
+    <link rel="preconnect" href="https://content.jwplatform.com">
+    
+
+</head>
+<body>
+
+    <div class="box-portada">
+        <video src="./video/video-portada.mp4" autoplay muted playsinline width="100%"></video>
+    </div>   
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">TODOS <br> LOS GOLES</button>
+        <button class="filter-btn" data-filter="equipos">POR <br> EQUIPOS</button>
+        <button class="filter-btn" data-filter="cuerpo">POR PARTE <br> DEL CUERPO</button>
+        <button class="filter-btn" data-filter="campo">POR PARTE <br> DEL CAMPO</button>
+        <button class="filter-btn" data-filter="minuto">POR MINUTO <br> DEL GOL</button>
+        <button class="filter-btn" data-filter="fecha">¿CR7 MARCÓ <br> EN TU CUMPLE?</button>
+    </div>
+
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Busca tu gol por rival, fecha o equipo" id="searchBox">
+    </div>
+
+    <!-- Calendario -->
+    <div class="calendar-container" id="calendarContainer">
+        <div class="calendar-header">ENERO</div>
+        <div class="calendar-nav">
+            <button class="nav-btn" id="prevMonth">◀</button>
+            <button class="nav-btn" id="nextMonth">▶</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid">
+            <!-- Los días se generarán dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Slider de minutos con diseño circular -->
+    <div class="minute-slider-container" id="minuteContainer">
+        <div class="clock-instruction">
+            <div class="reload-icon"></div>
+            Desliza el scroll y elige el minuto para ver los goles que marcó en ese momento
+        </div>
+        
+        <div class="minute-clock" id="minuteClock">
+            <div class="clock-numbers" id="clockNumbers">
+                <!-- Los números se generarán dinámicamente -->
+            </div>
+            <div class="minute-display-clock" id="minuteDisplayClock">4</div>
+            <div class="minute-indicator" id="minuteIndicator"></div>
+            <div class="minute-selector" id="minuteSelector"></div>
+        </div>
+    </div>
+
+    <div class="results-info" id="resultsInfo" style="display: none;"></div>
+
+    <div class="goals-grid" id="goalsGrid">
+        <div class="loading">Cargando goles...</div>
+    </div>    
+
+    <div class="pagination" id="pagination" style="display: none;">
+        <!-- La paginación se genera dinámicamente -->
+    </div>     
+
+    <!-- Modal para reproducir videos -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="video-container" id="videoContainer">
+                Video del gol se reproducirá aquí
+            </div>
+            <div id="goalModalInfo"></div>
+        </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+
+</body>
+</html>
