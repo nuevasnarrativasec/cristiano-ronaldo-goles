@@ -556,7 +556,62 @@ body.team-portugal {
     background-attachment: fixed;
 }
 
-/* Fondo por defecto */
+
+.body-parts-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.body-part-options {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.body-part-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    max-width: 140px;
+}
+
+.body-part-option:hover,
+.body-part-option.active {
+    
+    transform: translateY(-5px);
+}
+
+.silhouette-container {
+    width: 80px;
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+.player-silhouette {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+.body-part-label {
+    font: .8rem/1.1 'druk_wide_mediumregular';
+    color: white;
+}
+
+.body-part-option.active .body-part-label {
+    background-color: #DC143C;
+    padding: 5px 10px;
+}
 
 
         @media (max-width: 768px) {

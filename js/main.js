@@ -229,6 +229,7 @@
                 document.getElementById('minuteContainer').style.display = 'none';
                 document.getElementById('goalsGrid').style.display = 'grid';
                 document.getElementById('teamsContainer').style.display = 'none';
+                document.getElementById('bodyPartsContainer').style.display = 'none';
 
                 if (filter !== 'equipos') {
                     // Restaurar fondo rojo por defecto al salir de equipos
@@ -251,7 +252,12 @@
                     document.getElementById('teamsContainer').style.display = 'block';
                     document.getElementById('goalsGrid').style.display = 'none';
                     initTeamsSelector();
-                    selectTeam('Sporting Lisboa');
+                    selectTeam('Sporting Lisboa');                
+                } else if (filter === 'cuerpo') {
+                    document.getElementById('bodyPartsContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initBodyPartsSelector();
+                    selectBodyPart('De cabeza'); // Empezar con cabeza
                 } else {
                     applyFilter(filter);
                 }
@@ -492,6 +498,55 @@
             document.getElementById('goalsGrid').style.display = 'grid';
             renderGoals();
         } 
+
+        // Variables para selector de parte del cuerpo
+        let currentBodyPart = 'De cabeza';
+
+        // Inicializar selector de parte del cuerpo
+        function initBodyPartsSelector() {
+            const bodyPartOptions = document.querySelectorAll('.body-part-option');
+            
+            bodyPartOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const bodyPart = this.dataset.bodyPart;
+                    selectBodyPart(bodyPart);
+                });
+            });
+        }
+
+        // Seleccionar parte del cuerpo
+        function selectBodyPart(bodyPartName) {
+            currentBodyPart = bodyPartName;
+            
+            // Actualizar opciones activas
+            document.querySelectorAll('.body-part-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.bodyPart === bodyPartName) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Filtrar goles por parte del cuerpo
+            currentPage = 1;
+            let searchTerm = bodyPartName;
+            
+            // Ajustar términos de búsqueda
+            if (bodyPartName === 'Otros') {
+                filteredData = goalsData.filter(goal => 
+                    !goal.parteCuerpo.includes('cabeza') && 
+                    !goal.parteCuerpo.includes('derecha') && 
+                    !goal.parteCuerpo.includes('izquierda')
+                );
+            } else {
+                filteredData = goalsData.filter(goal => 
+                    goal.parteCuerpo.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            
+            // Mostrar goles debajo del selector
+            document.getElementById('goalsGrid').style.display = 'grid';
+            renderGoals();
+        }
 
         // Modal de video con embed de JWPlayer
         function openVideoModal(goalNumber) {
