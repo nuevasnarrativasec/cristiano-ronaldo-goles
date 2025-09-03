@@ -4,6 +4,7 @@
         let currentFilter = 'all';
         let currentPage = 1;
         let currentTeam = 'Portugal';
+        let currentFieldPart = 'Dentro del área';
         const GOALS_PER_PAGE = 12; // Número de goles por página
 
         // Configuración de la API de Google Sheets
@@ -230,6 +231,7 @@
                 document.getElementById('goalsGrid').style.display = 'grid';
                 document.getElementById('teamsContainer').style.display = 'none';
                 document.getElementById('bodyPartsContainer').style.display = 'none';
+                document.getElementById('fieldPartsContainer').style.display = 'none';
 
                 if (filter !== 'equipos') {
                     // Restaurar fondo rojo por defecto al salir de equipos
@@ -258,6 +260,12 @@
                     document.getElementById('goalsGrid').style.display = 'none';
                     initBodyPartsSelector();
                     selectBodyPart('De cabeza'); // Empezar con cabeza
+                } 
+                else if (filter === 'campo') {
+                    document.getElementById('fieldPartsContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initFieldPartsSelector();
+                    selectFieldPart('Dentro del área');
                 } else {
                     applyFilter(filter);
                 }
@@ -542,6 +550,41 @@
                     goal.parteCuerpo.toLowerCase().includes(searchTerm.toLowerCase())
                 );
             }
+            
+            // Mostrar goles debajo del selector
+            document.getElementById('goalsGrid').style.display = 'grid';
+            renderGoals();
+        }
+
+        // Inicializar selector de parte del campo
+        function initFieldPartsSelector() {
+            const fieldPartOptions = document.querySelectorAll('.field-part-option');
+            
+            fieldPartOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const fieldPart = this.dataset.fieldPart;
+                    selectFieldPart(fieldPart);
+                });
+            });
+        }
+
+        // Seleccionar parte del campo
+        function selectFieldPart(fieldPartName) {
+            currentFieldPart = fieldPartName;
+            
+            // Actualizar opciones activas
+            document.querySelectorAll('.field-part-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.fieldPart === fieldPartName) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Filtrar goles por parte del campo
+            currentPage = 1;
+            filteredData = goalsData.filter(goal => 
+                goal.situacion.toLowerCase().includes(fieldPartName.toLowerCase())
+            );
             
             // Mostrar goles debajo del selector
             document.getElementById('goalsGrid').style.display = 'grid';
