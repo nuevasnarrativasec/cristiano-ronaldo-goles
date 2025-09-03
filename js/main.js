@@ -3,6 +3,7 @@
         let filteredData = [];
         let currentFilter = 'all';
         let currentPage = 1;
+        let currentTeam = 'Portugal';
         const GOALS_PER_PAGE = 12; // Número de goles por página
 
         // Configuración de la API de Google Sheets
@@ -227,6 +228,15 @@
                 document.getElementById('calendarContainer').style.display = 'none';
                 document.getElementById('minuteContainer').style.display = 'none';
                 document.getElementById('goalsGrid').style.display = 'grid';
+                document.getElementById('teamsContainer').style.display = 'none';
+
+                if (filter !== 'equipos') {
+                    // Restaurar fondo rojo por defecto al salir de equipos
+                    const body = document.body;
+                    body.classList.remove('team-al-nassr', 'team-juventus', 'team-manchester-united', 
+                                        'team-real-madrid', 'team-sporting-lisboa', 'team-portugal');
+                    body.classList.add('bg-rojo');
+                }
                 
                 if (filter === 'fecha') {
                     document.getElementById('calendarContainer').style.display = 'block';
@@ -237,6 +247,11 @@
                     document.getElementById('goalsGrid').style.display = 'none';
                     initMinuteClock();
                     updateMinute(4); // Empezar con minuto 4
+                } else if (filter === 'equipos') {
+                    document.getElementById('teamsContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initTeamsSelector();
+                    selectTeam('Sporting Lisboa');
                 } else {
                     applyFilter(filter);
                 }
@@ -262,6 +277,12 @@
                 case 'campo':
                     // Implementar filtro por parte del campo
                     filteredData = [...goalsData];
+                    break;
+                case 'equipos':
+                    document.getElementById('teamsContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initTeamsSelector();
+                    selectTeam('Sporting Lisboa'); // Empezar con Portugal
                     break;
             }
             renderGoals();
@@ -423,6 +444,54 @@
             document.getElementById('goalsGrid').style.display = 'grid';
             renderGoals();
         }
+
+        // Selector de equipos
+        function initTeamsSelector() {
+            const teamLogos = document.querySelectorAll('.team-logo');
+            
+            teamLogos.forEach(logo => {
+                logo.addEventListener('click', function() {
+                    const team = this.dataset.team;
+                    selectTeam(team);
+                });
+            });
+        }
+
+        // Seleccionar equipo
+        function selectTeam(teamName) {
+            currentTeam = teamName;
+            
+            // Actualizar logos activos
+            document.querySelectorAll('.team-logo').forEach(logo => {
+                logo.classList.remove('active');
+                if (logo.dataset.team === teamName) {
+                    logo.classList.add('active');
+                }
+            });
+            
+            // Actualizar nombre del equipo
+            document.getElementById('currentTeamName').textContent = teamName.toUpperCase();
+            
+            // Cambiar fondo del body según el equipo
+            const body = document.body;
+            // Remover todas las clases de equipos
+            body.classList.remove('team-al-nassr', 'team-juventus', 'team-manchester-united', 
+                                'team-real-madrid', 'team-sporting-lisboa', 'team-portugal', 'bg-rojo');
+            
+            // Agregar clase del equipo seleccionado
+            const teamClass = 'team-' + teamName.toLowerCase().replace(' ', '-');
+            body.classList.add(teamClass);
+            
+            // Filtrar goles por equipo
+            currentPage = 1;
+            filteredData = goalsData.filter(goal => 
+                goal.local === teamName || goal.visita === teamName
+            );
+            
+            // Mostrar goles debajo del selector
+            document.getElementById('goalsGrid').style.display = 'grid';
+            renderGoals();
+        } 
 
         // Modal de video con embed de JWPlayer
         function openVideoModal(goalNumber) {

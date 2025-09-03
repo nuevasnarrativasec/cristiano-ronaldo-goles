@@ -83,6 +83,36 @@
         <input type="text" class="search-box" placeholder="Busca tu gol por rival, fecha o equipo" id="searchBox">
     </div>
 
+    <!-- Selector de equipos -->
+    <div class="teams-container" id="teamsContainer" style="display: none;">
+        <!--<div class="search-container">
+            <input type="text" class="search-box" placeholder="Busca un gol, rival, fecha" id="searchBoxTeams">
+        </div>-->
+        <div class="teams-selector">
+            <div class="team-logos">
+                <div class="team-logo" data-team="Sporting Lisboa">
+                    <img src="./img/escudo-1.png" alt="Sporting Lisboa" width="100%">
+                </div>
+                <div class="team-logo" data-team="Manchester United">
+                    <img src="./img/escudo-2.png" alt="Manchester United" width="100%">
+                </div>
+                <div class="team-logo" data-team="Real Madrid">
+                    <img src="./img/escudo-3.png" alt="Real Madrid" width="100%">
+                </div>
+                <div class="team-logo" data-team="Juventus">
+                    <img src="./img/escudo-4.png" alt="Juventus" width="100%">
+                </div>
+                <div class="team-logo" data-team="Al Nassr">
+                    <img src="./img/escudo-5.png" alt="Al Nassr" width="100%">
+                </div>
+                <div class="team-logo active" data-team="Portugal">
+                    <img src="./img/escudo-6.png" alt="Portugal" width="100%">
+                </div>
+            </div>
+            <div class="current-team-name" id="currentTeamName">PORTUGAL</div>
+        </div>
+    </div>
+
     <!-- Calendario -->
     <div class="calendar-container" id="calendarContainer">
         <div class="calendar-header">ENERO</div>
@@ -121,6 +151,30 @@
     <div class="pagination" id="pagination" style="display: none;">
         <!-- La paginación se genera dinámicamente -->
     </div>     
+
+    <div class="box-footer">
+        <img src="./img/logo-dt.png" alt="DT" width="100%">
+        <ul>
+            <li>
+                <p>
+                    <span>Investigación:</span> 
+                    Raúl Castillo
+                </p>
+            </li>
+            <li>
+                <p>
+                    <span>Investigación y desarrollo:</span> 
+                    Christian Marlow
+                </p>
+            </li>
+            <li>
+                <p>
+                    <span>Programación:</span> 
+                    Armando Scargglioni C.
+                </p>
+            </li>
+        </ul>
+    </div>
 
     <!-- Modal para reproducir videos -->
     <div id="videoModal" class="modal">

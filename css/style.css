@@ -15,6 +15,11 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        body.bg-rojo{
+            background-image: url('../img/bg-rojo.jpg');
+        }
+
+
         .filters {
             background: rgba(139, 0, 0, 0.9);
             padding: 20px;
@@ -104,8 +109,7 @@
         }
 
         .goal-teams {
-            font-size: 18px;
-            font-weight: bold;
+            font: 1.6rem/1 'Quinn';
             color: #0b558e;
         }
 
@@ -183,26 +187,27 @@
             transform: translate(-50%, -50%);
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 10px;
             max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
+            width: 25%;
+            max-height: 90%;
             overflow-y: auto;
         }
 
         .close {
             position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 30px;
+            right: 25px;
+            top: 13px;
+            font-size: 45px;
             font-weight: bold;
             cursor: pointer;
-            color: #8B0000;
+            color: #ffffff;
+            z-index: 20;
         }
 
         .video-container {
             width: 100%;
-            height: 400px;
+            height: 85vh;
             background: #000;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -422,7 +427,7 @@
             align-items: center;
             background: transparent;
             border: none;
-            color: #D57C7C;
+            color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             display: flex;
             font: 1.3rem/1.2 'Abolition Test Round';          
@@ -456,11 +461,103 @@
         }
 
         .results-info {
+            font: 1rem/1.1 'druk_wide_mediumregular';
             text-align: center;
             margin: 20px 0;
-            font-size: 1.1rem;
             opacity: 0.9;
         }
+
+        .teams-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.team-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.team-logo {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.team-logo:hover,
+.team-logo.active {    
+    transform: scale(1.1);
+}
+    .team-logo.active img{
+        filter: grayscale(0);
+    }
+
+.team-logo img {
+    filter: grayscale(1);
+    width: 50px;
+}
+
+.current-team-name {
+    font: 1.4rem/1.1 'druk_wide_mediumregular';
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+
+/* Estilos para los fondos de equipos en el body */
+body.team-al-nassr {
+    background-image: url('../img/bg-al-nassr.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body.team-juventus {
+    background-image: url('../img/bg-juventus.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body.team-manchester-united {
+    background-image: url('../img/bg-manchester-united.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body.team-real-madrid {
+    background-image: url('../img/bg-real-madrid.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body.team-sporting-lisboa {
+    background-image: url('../img/bg-sporting-lisboa.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body.team-portugal {
+    background-image: url('../img/bg-portugal.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Fondo por defecto */
+
 
         @media (max-width: 768px) {
             .hero-number {
@@ -493,6 +590,17 @@
     src: url('../fonts/Abolition-RoundOblique.woff2') format('woff2'),
         url('../fonts/Abolition-RoundOblique.woff') format('woff');  
 }
+@font-face {
+    font-family: 'Quinn';
+    src: url('../fonts/Quinn-Bold.woff2') format('woff2'),
+        url('../fonts/Quinn-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'druk_wide_mediumregular';
+    src: url('../fonts/fonnts.com-druk_wide_medium-webfont.woff2') format('woff2'),
+         url('../fonts/fonnts.com-druk_wide_medium-webfont.woff') format('woff');
+}
+
 .box-portada {
     background-color: #000;
     position: relative;
@@ -510,3 +618,28 @@
     background: linear-gradient(180deg, rgba(125, 41, 41, 1) 0%, rgba(232, 14, 14, 1) 20%, rgba(65, 0, 0, 1) 80%, rgba(65, 0, 0, 1) 100%);
     border-bottom: none;
 }
+#goalModalInfo{
+    display: none;
+}
+.box-footer{
+
+}
+    .box-footer img{
+        display: block;
+        margin: 10px auto 30px;
+        max-width: 80px;
+    }
+    .box-footer ul{
+        padding: 0;
+        text-align: center;
+    }
+        .box-footer ul li{
+            margin: 0 auto 10px;
+        }
+            .box-footer ul li p{
+                font: .9rem/1.2 arial;
+                margin: 0;
+            }
+                .box-footer ul li span{
+                    font-weight: bold;
+                }
