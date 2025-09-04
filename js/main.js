@@ -648,10 +648,26 @@
         // Calendario
         let currentMonth = 0; // Enero
         const months = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 
-                       'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+                       'JULIO', 'AGOSTO', 'SETIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
 
         function initCalendar() {
             renderCalendar();
+        }
+
+        // Función para verificar si hay goles en una fecha específica
+        function hasGoalsOnDate(day, month, year = null) {
+            const monthNames = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+                            'julio', 'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre'];
+            
+            const searchDay = day.toString();
+            const searchMonth = monthNames[month];
+            
+            return goalsData.some(goal => {
+                const goalDate = goal.fecha.toLowerCase();
+                // Buscar patrón exacto: "X de mes" 
+                const dayPattern = new RegExp(`\\b${searchDay}\\s+de\\s+${searchMonth}\\b`);
+                return dayPattern.test(goalDate);
+            });
         }
 
         function renderCalendar() {
@@ -665,10 +681,10 @@
             let daysHTML = '';
             
             for (let i = 1; i <= daysInMonth; i++) {
-                const hasGoals = Math.random() > 0.7; // Simulación
+                const hasGoals = hasGoalsOnDate(i, currentMonth);
                 daysHTML += `
                     <div class="calendar-day ${hasGoals ? 'has-goals' : ''}" 
-                         onclick="filterByDate(${i}, ${currentMonth})">
+                        onclick="filterByDate(${i}, ${currentMonth})">
                         ${i}
                     </div>
                 `;
@@ -678,15 +694,27 @@
         }
 
         function filterByDate(day, month) {
-            const monthName = months[month].toLowerCase();
-            currentPage = 1; // Resetear página
+            const monthNames = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+                            'julio', 'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre'];
             
-            filteredData = goalsData.filter(goal => 
-                goal.fecha.toLowerCase().includes(`${day} de ${monthName}`)
-            );
+            currentPage = 1;
+            const searchDay = day.toString();
+            const searchMonth = monthNames[month];
             
+            // Filtrar con patrón exacto para evitar confusiones (7 vs 27)
+            filteredData = goalsData.filter(goal => {
+                const goalDate = goal.fecha.toLowerCase();
+                // Buscar patrón exacto: "X de mes" (no "X7" o "2X")
+                const dayPattern = new RegExp(`\\b${searchDay}\\s+de\\s+${searchMonth}\\b`);
+                return dayPattern.test(goalDate);
+            });
+            
+            // Ocultar calendario y mostrar goles con botón de regreso
             document.getElementById('calendarContainer').style.display = 'none';
             document.getElementById('goalsGrid').style.display = 'grid';
+            
+            // Mostrar botón de regreso
+            showBackToCalendarButton();
             renderGoals();
         }
 
@@ -700,6 +728,21 @@
             currentMonth = currentMonth < 11 ? currentMonth + 1 : 0;
             renderCalendar();
         });
+
+        // Mostrar botón de regreso al calendario
+        function showBackToCalendarButton() {
+            document.getElementById('backToCalendar').style.display = 'block';
+        }
+
+        // Volver al calendario
+        function backToCalendar() {
+            document.getElementById('backToCalendar').style.display = 'none';
+            document.getElementById('calendarContainer').style.display = 'block';
+            document.getElementById('goalsGrid').style.display = 'none';
+            
+            // Restaurar todos los goles
+            filteredData = [...goalsData];
+        }
 
         // Inicializar aplicación con optimizaciones SEO
         document.addEventListener('DOMContentLoaded', function() {

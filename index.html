@@ -115,15 +115,25 @@
 
     <!-- Calendario -->
     <div class="calendar-container" id="calendarContainer">
+        <p class="bajada-calendario">
+            Busca en nuestro calendario el día de tu nacimiento y comprueba si Cristiano Ronaldo te regalo un golazo por tu cumpleaños.
+        </p>
         <div class="calendar-header">ENERO</div>
         <div class="calendar-nav">
             <button class="nav-btn" id="prevMonth">◀</button>
             <button class="nav-btn" id="nextMonth">▶</button>
         </div>
+        
         <div class="calendar-grid" id="calendarGrid">
             <!-- Los días se generarán dinámicamente -->
         </div>
+        
     </div>
+    <div class="back-to-calendar" id="backToCalendar" style="display: none;">
+            <button class="back-btn" onclick="backToCalendar()">
+                ← Volver al calendario
+            </button>
+        </div>
 
     <!-- Slider de minutos con diseño circular -->
     <div class="minute-slider-container" id="minuteContainer">

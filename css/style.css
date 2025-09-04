@@ -225,21 +225,26 @@
             display: none;
             max-width: 800px;
             margin: 30px auto;
-            background: rgba(255,255,255,0.1);
             border-radius: 15px;
             padding: 30px;
+        }
+        p.bajada-calendario{
+            font: 1.1rem / 1.2 arial;
+            text-align: center;
+            max-width: 550px;
+            margin: 0 auto 20px;
         }
 
         .calendar-header {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            font-weight: bold;
+            margin-bottom: 0;
+            font: 1.5rem / 1.1 'druk_wide_mediumregular';
         }
 
         .calendar-nav {
             display: flex;
             justify-content: space-between;
+            margin-top: -30px;
             align-items: center;
             margin-bottom: 20px;
         }
@@ -254,6 +259,27 @@
             font-weight: bold;
         }
 
+        .back-to-calendar {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #8B0000;
+        }
+
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -261,15 +287,15 @@
         }
 
         .calendar-day {
+            font: 1rem / 1.1 'druk_wide_mediumregular';
             aspect-ratio: 1;
             background: rgba(255,255,255,0.2);
             border: 2px solid transparent;
-            border-radius: 8px;
+            border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-weight: bold;
             transition: all 0.3s ease;
         }
 
