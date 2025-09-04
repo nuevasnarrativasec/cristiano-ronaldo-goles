@@ -186,8 +186,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            border-radius: 20px;
-            padding: 10px;
+            border-radius: 15px;
+            padding: 5px;
             max-width: 800px;
             width: 25%;
             max-height: 90%;
@@ -210,7 +210,6 @@
             height: 85vh;
             background: #000;
             border-radius: 10px;
-            margin-bottom: 20px;
             position: relative;
             overflow: hidden;
         }
@@ -284,7 +283,6 @@
             display: none;
             max-width: 800px;
             margin: 30px auto;
-            background: rgba(255,255,255,0.1);
             border-radius: 15px;
             padding: 30px;
             text-align: center;
@@ -296,7 +294,7 @@
             height: 300px;
             margin: 20px auto;
             border-radius: 50%;
-            background: conic-gradient(from 0deg, #FF0000 0deg, #DC143C 360deg);
+            background: conic-gradient(from 0deg, #e8dddd 0deg, #f7f4f4 360deg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -314,22 +312,22 @@
 
         .minute-indicator {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 20px;
+            height: 20px;
             background: white;
-            border-radius: 2px;
+            border-radius: 20px;
             z-index: 3;
             transition: all 0.1s ease;
             transform: translate(-50%, -50%);
         }
 
         .minute-display-clock {
-            position: relative;
-            z-index: 10;
-            font-size: 8rem;
-            font-weight: 900;
             color: white;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            font: 9rem / 1 'Abolition Test Round';
+            position: relative;
+            z-index: 10;            
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            margin-top: -50px;
         }
 
         .clock-numbers {
@@ -339,33 +337,36 @@
             border-radius: 50%;
             scale: 1.1;
         }
+            #clockNumbers > .clock-number:nth-child(1){
+                opacity: 0;
+            }
 
         .clock-number {
+            font: 1.4rem/1 'Abolition Test Round';
             position: absolute;
             color: white;
             font-weight: bold;
-            font-size: 1.2rem;
             transform: translate(-50%, -50%);
         }
 
         .clock-instruction {
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            font: 1.1rem / 1.2 arial;
             color: white;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            max-width: 350px;
+            margin: 0 auto 40px;
+            text-align: center;
         }
 
         .reload-icon {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
+            display: block;
+            width: 45px;
+            height: 45px;
             border: 3px solid white;
             border-radius: 50%;
             border-top: 3px solid transparent;
             position: relative;
+            margin: 0 auto 15px;
         }
 
         .reload-icon::after {
@@ -374,7 +375,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 18px;
+            font-size: 30px;
             color: white;
         }
 
@@ -736,7 +737,7 @@ body.team-portugal {
     display: none;
 }
 .box-footer{
-
+    padding: 50px 0;
 }
     .box-footer img{
         display: block;
