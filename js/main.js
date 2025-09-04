@@ -1,4 +1,4 @@
-// Simulación de datos (reemplazar por la llamada real a Google Sheets)
+
         let goalsData = [];
         let filteredData = [];
         let currentFilter = 'all';
@@ -8,9 +8,9 @@
         const GOALS_PER_PAGE = 12; // Número de goles por página
 
         // Configuración de la API de Google Sheets
-        const SHEET_ID = '1rmq-uovoEXAFFD07h8MSUWfeI2Y7P2wg596PJ4CTceU'; // Reemplazar con tu ID
-        const API_KEY = 'AIzaSyBiMIQGfjmnqRXpBANVOaK4HCEUp-dx0uw'; // Reemplazar con tu API key
-        const SHEET_NAME = 'Hoja 1'; // Nombre de tu hoja
+        const SHEET_ID = '1rmq-uovoEXAFFD07h8MSUWfeI2Y7P2wg596PJ4CTceU'; // Sheet ID
+        const API_KEY = 'AIzaSyBiMIQGfjmnqRXpBANVOaK4HCEUp-dx0uw'; // API key
+        const SHEET_NAME = 'Hoja 1'; // Nombre de la hoja
 
         // Función para cargar datos desde Google Sheets
         async function loadGoalsData() {

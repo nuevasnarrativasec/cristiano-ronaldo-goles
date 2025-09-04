@@ -1,132 +1,118 @@
 * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {                        
-            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
-            background-image: url('../img/bg-rojo.jpg');
-            min-height: 100vh;
-            color: white;
-            font-style: normal;
-            font-display: swap;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+body {                        
+    background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+    background-image: url('../img/bg-rojo.jpg');
+    color: white;    
+    font-style: normal;
+    font-display: swap;
+    min-height: 100vh;    
 
-        body.bg-rojo{
-            background-image: url('../img/bg-rojo.jpg');
-        }
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-
-        .filters {
-            background: rgba(139, 0, 0, 0.9);
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            border-bottom: 3px solid #FFD700;
-        }
-
-        .filter-btn {
-            font: 1.6rem/1 "Bebas Neue", sans-serif;
-            background: transparent;
-            border: none;
-            color: white;
-            padding: 12px 25px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
+    body.bg-rojo{
+        background-image: url('../img/bg-rojo.jpg');
+    }
+.filters {
+    background: rgba(139, 0, 0, 0.9);
+    border-bottom: 3px solid #FFD700;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+}
+    .filter-btn {
+        font: 1.6rem/1 "Bebas Neue", sans-serif;
+        background: transparent;
+        border: none;
+        color: white;
+        padding: 12px 25px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
         .filter-btn:hover,
         .filter-btn.active {
             color: #FFD800;
             transform: translateY(-2px);
         }
-
-        .search-container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .search-box {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 15px 25px;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .goals-grid {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
+.search-container {
+    margin: 30px auto;
+    max-width: 1200px;    
+    padding: 0 20px;
+    text-align: center;
+}
+    .search-box {
+        background: white;
+        border: none;
+        border-radius: 50px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);        
+        font-size: 18px;        
+        margin: 0 auto;
+        max-width: 600px;        
+        padding: 15px 25px;
+        width: 100%;   
+    }
+.goals-grid {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+    
+    .goal-card {
+        background: white;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        color: #333;
+        cursor: pointer;   
+        transition: all 0.3s ease;
+        overflow: hidden;
+        padding: 10px;
+        loading: lazy;
+    }
+        .goal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
         }
         .ctn-info-gol{
             border: 1px solid #0b558e;
             min-height: 370px;
             text-align: center;
         }
-
-        .goal-card {
-            background: white;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            color: #333;
-            cursor: pointer;   
-            transition: all 0.3s ease;
-            overflow: hidden;
-            padding: 10px;
-            loading: lazy;
-        }
-
-        .goal-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-        }
-
-        .goal-number {
-            color: #0B558E;
-            font: 8rem/1 'Abolition Test Round';
-            text-align: center;
-            position: relative;
-        }
-
-        .goal-info {
-            padding: 20px;
-        }
-
-        .goal-teams {
-            font: 1.6rem/1 'Quinn';
-            color: #0b558e;
-        }
-
-        .goal-result{
-            font: 1.5rem/1.2 'Abolition Test Round';
-        }
-
-        .goal-competition{
-            font: 1rem/1.3 arial;
-            font-weight: 600;
-        }
-
-        .goal-date{
-            font: 0.9rem/1.3 arial;
-            font-weight: 500;
-        }
-
+            .goal-number {
+                color: #0B558E;
+                font: 8rem/1 'Abolition Test Round';
+                text-align: center;
+                position: relative;
+            }
+            .goal-info {
+                padding: 20px;
+            }
+                .goal-teams {
+                    color: #0b558e;
+                    font: 1.6rem/1 'Quinn';                    
+                }
+                .goal-result{
+                    font: 1.5rem/1.2 'Abolition Test Round';
+                }
+                .goal-competition{
+                    font: 1rem/1.3 arial;
+                    font-weight: 600;
+                }
+                .goal-date{
+                    font: 0.9rem/1.3 arial;
+                    font-weight: 500;
+                }
         .goal-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -134,22 +120,18 @@
             font-size: 14px;
             margin-bottom: 15px;
         }
-
         .goal-detail {
             display: flex;
             flex-direction: column;
         }
-
         .detail-label {
             font-weight: bold;
             color: #666;
             margin-bottom: 3px;
         }
-
         .detail-value {
             color: #333;
         }
-
         .play-btn {
             background: #8B0000;
             color: white;
@@ -699,27 +681,6 @@ body.team-portugal {
         color: #fff;
     }
 
-
-        @media (max-width: 768px) {
-            .hero-number {
-                font-size: 8rem;
-            }
-            
-            .filters {
-                padding: 15px 10px;
-            }
-            
-            .filter-btn {
-                padding: 10px 15px;
-                font-size: 12px;
-            }
-            
-            .goals-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
-            }
-        }
-
 @media (max-height: 900px) {
 
     .modal-content{
@@ -727,9 +688,33 @@ body.team-portugal {
     }
 
 }
-        
 
+@media (max-width: 640px){
 
+    body .box-portada video{
+        height: 50dvh;
+    }
+    body .goals-grid{
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+}
+
+@media (max-width: 768px) {
+            
+    .filters {
+        padding: 15px 10px;
+    }            
+        .filter-btn {
+            padding: 10px 15px;
+            font-size: 12px;
+        }            
+    .goals-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }  
+}
+    
 @font-face {
     font-family: 'abolition_testsoft_oblique';
     src: url('../fonts/abolitiontest-softoblique-webfont.woff2') format('woff2'),
