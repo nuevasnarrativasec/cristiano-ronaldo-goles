@@ -6,7 +6,7 @@
 
 body {                        
     background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
-    background-image: url('../img/bg-rojo.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-rojo.jpg');
     color: white;    
     font-style: normal;
     font-display: swap;
@@ -17,7 +17,7 @@ body {
 }
 
     body.bg-rojo{
-        background-image: url('../img/bg-rojo.jpg');
+        background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-rojo.jpg');
     }
 .filters {
     background: rgba(139, 0, 0, 0.9);
@@ -569,42 +569,42 @@ body {
 
 /* Estilos para los fondos de equipos en el body */
 body.team-al-nassr {
-    background-image: url('../img/bg-al-nassr.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-al-nassr.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 body.team-juventus {
-    background-image: url('../img/bg-juventus.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-juventus.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 body.team-manchester-united {
-    background-image: url('../img/bg-manchester-united.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-manchester-united.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 body.team-real-madrid {
-    background-image: url('../img/bg-real-madrid.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-real-madrid.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 body.team-sporting-lisboa {
-    background-image: url('../img/bg-sporting-lisboa.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-sporting-lisboa.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 body.team-portugal {
-    background-image: url('../img/bg-portugal.jpg');
+    background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-portugal.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -827,23 +827,23 @@ body.team-portugal {
     
 @font-face {
     font-family: 'abolition_testsoft_oblique';
-    src: url('../fonts/abolitiontest-softoblique-webfont.woff2') format('woff2'),
-         url('../fonts/abolitiontest-softoblique-webfont.woff') format('woff');  
+    src: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/abolitiontest-softoblique-webfont.woff2') format('woff2'),
+         url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/abolitiontest-softoblique-webfont.woff') format('woff');  
 }
 @font-face {
     font-family: 'Abolition Test Round';
-    src: url('../fonts/Abolition-RoundOblique.woff2') format('woff2'),
-        url('../fonts/Abolition-RoundOblique.woff') format('woff');  
+    src: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/Abolition-RoundOblique.woff2') format('woff2'),
+        url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/Abolition-RoundOblique.woff') format('woff');  
 }
 @font-face {
     font-family: 'Quinn';
-    src: url('../fonts/Quinn-Bold.woff2') format('woff2'),
-        url('../fonts/Quinn-Bold.woff') format('woff');
+    src: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/Quinn-Bold.woff2') format('woff2'),
+        url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/Quinn-Bold.woff') format('woff');
 }
 @font-face {
     font-family: 'druk_wide_mediumregular';
-    src: url('../fonts/fonnts.com-druk_wide_medium-webfont.woff2') format('woff2'),
-         url('../fonts/fonnts.com-druk_wide_medium-webfont.woff') format('woff');
+    src: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/fonnts.com-druk_wide_medium-webfont.woff2') format('woff2'),
+         url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/fonnts.com-druk_wide_medium-webfont.woff') format('woff');
 }
 
 .box-portada {
