@@ -379,15 +379,22 @@
 
         // Búsqueda
         document.getElementById('searchBox').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
+            const searchTerm = e.target.value.toLowerCase().trim();
             currentPage = 1; // Resetear a la primera página
             
-            filteredData = goalsData.filter(goal => 
-                goal.local.toLowerCase().includes(searchTerm) ||
-                goal.visita.toLowerCase().includes(searchTerm) ||
-                goal.competicion.toLowerCase().includes(searchTerm) ||
-                goal.fecha.toLowerCase().includes(searchTerm)
-            );
+            filteredData = goalsData.filter(goal => {
+                // Si el término de búsqueda es un número, buscar coincidencia exacta en el número de gol
+                if (!isNaN(searchTerm) && searchTerm !== '') {
+                    return goal.numero.toString() === searchTerm;
+                }
+                
+                // Si no es un número, buscar en los otros campos
+                return goal.local.toLowerCase().includes(searchTerm) ||
+                    goal.visita.toLowerCase().includes(searchTerm) ||
+                    goal.competicion.toLowerCase().includes(searchTerm) ||
+                    goal.fecha.toLowerCase().includes(searchTerm);
+            });
+            
             renderGoals();
         });
 
