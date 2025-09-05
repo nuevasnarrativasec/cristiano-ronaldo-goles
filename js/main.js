@@ -24,11 +24,11 @@
                 const data = await response.json();
                 
                 if (data.values && data.values.length > 1) {
-                    // Procesar los datos del sheet
-                    goalsData = data.values.slice(1)
-                        .filter(row => row && row.length > 0) // Filtrar filas vacías
+                    // Procesar los datos del sheet con mejor filtrado
+                    const rawData = data.values.slice(1) // Omitir encabezados
+                        .filter(row => row && row.length > 0 && row[0] && row[0].toString().trim() !== '') // Filtrar filas vacías y sin número
                         .map((row, index) => ({
-                            numero: parseInt(row[0]) || index + 1,
+                            numero: parseInt(row[0]) || 0,
                             temporada: row[1] || 'N/A',
                             fecha: row[2] || 'N/A',
                             local: row[3] || 'N/A',
@@ -38,15 +38,16 @@
                             parteCuerpo: row[7] || 'N/A',
                             situacion: row[8] || 'N/A',
                             competicion: row[9] || 'N/A',
-                            codigoJWPlayer: row[10] || '', // Código de JWPlayer (ej: TstMSBzy, rxq3j8xG, etc.)
-                            numeroGol: row[11] || row[0] || '' // Número de gol
+                            codigoJWPlayer: row[10] || '',
+                            numeroGol: row[11] || row[0] || ''
                         }))
-                        .sort((a, b) => b.numero - a.numero); // Ordenar descendente por número
+                        .filter(goal => goal.numero > 0) // Solo goles con número válido
+                        .sort((a, b) => b.numero - a.numero);
                     
-                    console.log('Datos procesados:', goalsData.length, 'goles');
-                    console.log('Primer gol:', goalsData[0]);
-                    console.log('Último gol:', goalsData[goalsData.length - 1]);
+                    console.log('Datos procesados:', rawData.length, 'goles');
+                    console.log('Números de goles:', rawData.map(g => g.numero).slice(0, 10)); // Ver primeros 10 números
                     
+                    goalsData = rawData;
                     filteredData = [...goalsData];
                     renderGoals();
                 } else {
@@ -115,75 +116,78 @@
         }
 
         // Manejar cambios en el select móvil
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileSelect = document.getElementById('mobileFilterSelect');
-    
-    if (mobileSelect) {
-        mobileSelect.addEventListener('change', function() {
-            const selectedFilter = this.value;
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileSelect = document.getElementById('mobileFilterSelect');
             
-            // Trigger el mismo comportamiento que los botones desktop
-            const correspondingBtn = document.querySelector(`[data-filter="${selectedFilter}"]`);
-            if (correspondingBtn) {
-                // Actualizar botones activos en desktop (para sincronización)
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                correspondingBtn.classList.add('active');
-                
-                // Aplicar el filtro
-                currentFilter = selectedFilter;
-                
-                // Ocultar todos los contenedores especiales
-                document.getElementById('calendarContainer').style.display = 'none';
-                document.getElementById('minuteContainer').style.display = 'none';
-                document.getElementById('teamsContainer').style.display = 'none';
-                document.getElementById('bodyPartsContainer').style.display = 'none';
-                document.getElementById('fieldPartsContainer').style.display = 'none';
-                document.getElementById('goalsGrid').style.display = 'grid';
-                
-                // Restaurar fondo por defecto
-                const body = document.body;
-                body.classList.remove('team-al-nassr', 'team-juventus', 'team-manchester-united', 
-                                   'team-real-madrid', 'team-sporting-lisboa', 'team-portugal');
-                body.classList.add('bg-rojo');
-                
-                // Aplicar filtros específicos
-                if (selectedFilter === 'fecha') {
-                    document.getElementById('calendarContainer').style.display = 'block';
-                    document.getElementById('goalsGrid').style.display = 'none';
-                    initCalendar();
-                } else if (selectedFilter === 'minuto') {
-                    document.getElementById('minuteContainer').style.display = 'block';
-                    document.getElementById('goalsGrid').style.display = 'none';
-                    initMinuteClock();
-                    updateMinute(4);
-                } else if (selectedFilter === 'equipos') {
-                    document.getElementById('teamsContainer').style.display = 'block';
-                    document.getElementById('goalsGrid').style.display = 'none';
-                    initTeamsSelector();
-                    selectTeam('Portugal');
-                } else if (selectedFilter === 'cuerpo') {
-                    document.getElementById('bodyPartsContainer').style.display = 'block';
-                    document.getElementById('goalsGrid').style.display = 'none';
-                    initBodyPartsSelector();
-                    selectBodyPart('De cabeza');
-                } else if (selectedFilter === 'campo') {
-                    document.getElementById('fieldPartsContainer').style.display = 'block';
-                    document.getElementById('goalsGrid').style.display = 'none';
-                    initFieldPartsSelector();
-                    selectFieldPart('Dentro del area');
-                } else {
-                    applyFilter(selectedFilter);
-                }
+            if (mobileSelect) {
+                mobileSelect.addEventListener('change', function() {
+                    const selectedFilter = this.value;
+                    
+                    // Trigger el mismo comportamiento que los botones desktop
+                    const correspondingBtn = document.querySelector(`[data-filter="${selectedFilter}"]`);
+                    if (correspondingBtn) {
+                        // Actualizar botones activos en desktop (para sincronización)
+                        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                        correspondingBtn.classList.add('active');
+                        
+                        // Aplicar el filtro
+                        currentFilter = selectedFilter;
+                        
+                        // Ocultar todos los contenedores especiales
+                        document.getElementById('calendarContainer').style.display = 'none';
+                        document.getElementById('minuteContainer').style.display = 'none';
+                        document.getElementById('teamsContainer').style.display = 'none';
+                        document.getElementById('bodyPartsContainer').style.display = 'none';
+                        document.getElementById('fieldPartsContainer').style.display = 'none';
+                        document.getElementById('goalsGrid').style.display = 'grid';
+                        
+                        // Restaurar fondo por defecto
+                        const body = document.body;
+                        body.classList.remove('team-al-nassr', 'team-juventus', 'team-manchester-united', 
+                                        'team-real-madrid', 'team-sporting-lisboa', 'team-portugal');
+                        body.classList.add('bg-rojo');
+                        
+                        // Aplicar filtros específicos
+                        if (selectedFilter === 'fecha') {
+                            document.getElementById('calendarContainer').style.display = 'block';
+                            document.getElementById('goalsGrid').style.display = 'none';
+                            initCalendar();
+                        } else if (selectedFilter === 'minuto') {
+                            document.getElementById('minuteContainer').style.display = 'block';
+                            document.getElementById('goalsGrid').style.display = 'none';
+                            initMinuteClock();
+                            updateMinute(4);
+                        } else if (selectedFilter === 'equipos') {
+                            document.getElementById('teamsContainer').style.display = 'block';
+                            document.getElementById('goalsGrid').style.display = 'none';
+                            initTeamsSelector();
+                            selectTeam('Portugal');
+                        } else if (selectedFilter === 'cuerpo') {
+                            document.getElementById('bodyPartsContainer').style.display = 'block';
+                            document.getElementById('goalsGrid').style.display = 'none';
+                            initBodyPartsSelector();
+                            selectBodyPart('De cabeza');
+                        } else if (selectedFilter === 'campo') {
+                            document.getElementById('fieldPartsContainer').style.display = 'block';
+                            document.getElementById('goalsGrid').style.display = 'none';
+                            initFieldPartsSelector();
+                            selectFieldPart('Dentro del area');
+                        } else {
+                            applyFilter(selectedFilter);
+                        }
+                    }
+                });
             }
         });
-    }
-});
 
         // Renderizar goles con paginación
         function renderGoals() {
             const grid = document.getElementById('goalsGrid');
             const resultsInfo = document.getElementById('resultsInfo');
             const pagination = document.getElementById('pagination');
+            
+            // Detectar si estamos en vista de calendario
+            const isCalendarFilter = currentFilter === 'fecha';
             
             if (filteredData.length === 0) {
                 grid.innerHTML = '<div class="no-results">No se encontraron goles con los filtros actuales</div>';
@@ -197,11 +201,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const endIndex = Math.min(startIndex + GOALS_PER_PAGE, filteredData.length);
             const currentPageData = filteredData.slice(startIndex, endIndex);
 
-            // Mostrar información de resultados
-            resultsInfo.style.display = 'block';
-            resultsInfo.innerHTML = `
-                Mostrando ${filteredData.length} goles
-            `;
+            // Mostrar información de resultados (ocultar completamente en filtro de fechas)
+            if (isCalendarFilter) {
+                resultsInfo.style.display = 'none';
+            } else {
+                resultsInfo.style.display = 'block';
+                resultsInfo.innerHTML = `Mostrando ${filteredData.length} goles`;
+            }
 
             // Renderizar goles de la página actual
             grid.innerHTML = currentPageData.map(goal => `
@@ -220,8 +226,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `).join('');
 
-            // Renderizar paginación
-            renderPagination();
+            // Renderizar paginación (ocultar completamente en filtro de fechas)
+            if (isCalendarFilter) {
+                pagination.style.display = 'none';
+            } else {
+                renderPagination();
+            }
         }
 
         // Renderizar controles de paginación
@@ -805,7 +815,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('calendarContainer').style.display = 'block';
             document.getElementById('goalsGrid').style.display = 'none';
             
-            // Restaurar todos los goles
+            // Restaurar todos los goles sin mostrar info ni paginación
             filteredData = [...goalsData];
         }
 
