@@ -114,6 +114,71 @@
             return sampleGoals;
         }
 
+        // Manejar cambios en el select móvil
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileSelect = document.getElementById('mobileFilterSelect');
+    
+    if (mobileSelect) {
+        mobileSelect.addEventListener('change', function() {
+            const selectedFilter = this.value;
+            
+            // Trigger el mismo comportamiento que los botones desktop
+            const correspondingBtn = document.querySelector(`[data-filter="${selectedFilter}"]`);
+            if (correspondingBtn) {
+                // Actualizar botones activos en desktop (para sincronización)
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                correspondingBtn.classList.add('active');
+                
+                // Aplicar el filtro
+                currentFilter = selectedFilter;
+                
+                // Ocultar todos los contenedores especiales
+                document.getElementById('calendarContainer').style.display = 'none';
+                document.getElementById('minuteContainer').style.display = 'none';
+                document.getElementById('teamsContainer').style.display = 'none';
+                document.getElementById('bodyPartsContainer').style.display = 'none';
+                document.getElementById('fieldPartsContainer').style.display = 'none';
+                document.getElementById('goalsGrid').style.display = 'grid';
+                
+                // Restaurar fondo por defecto
+                const body = document.body;
+                body.classList.remove('team-al-nassr', 'team-juventus', 'team-manchester-united', 
+                                   'team-real-madrid', 'team-sporting-lisboa', 'team-portugal');
+                body.classList.add('bg-rojo');
+                
+                // Aplicar filtros específicos
+                if (selectedFilter === 'fecha') {
+                    document.getElementById('calendarContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initCalendar();
+                } else if (selectedFilter === 'minuto') {
+                    document.getElementById('minuteContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initMinuteClock();
+                    updateMinute(4);
+                } else if (selectedFilter === 'equipos') {
+                    document.getElementById('teamsContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initTeamsSelector();
+                    selectTeam('Portugal');
+                } else if (selectedFilter === 'cuerpo') {
+                    document.getElementById('bodyPartsContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initBodyPartsSelector();
+                    selectBodyPart('De cabeza');
+                } else if (selectedFilter === 'campo') {
+                    document.getElementById('fieldPartsContainer').style.display = 'block';
+                    document.getElementById('goalsGrid').style.display = 'none';
+                    initFieldPartsSelector();
+                    selectFieldPart('Dentro del area');
+                } else {
+                    applyFilter(selectedFilter);
+                }
+            }
+        });
+    }
+});
+
         // Renderizar goles con paginación
         function renderGoals() {
             const grid = document.getElementById('goalsGrid');
