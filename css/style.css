@@ -114,6 +114,10 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 25px;
 }
+    .goals-grid:has(.goal-card:only-child) .goal-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
     
     .goal-card {
         background: white;
