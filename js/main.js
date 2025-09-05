@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Mostrar información de resultados
             resultsInfo.style.display = 'block';
             resultsInfo.innerHTML = `
-                Mostrando ${startIndex + 1}-${endIndex} de ${filteredData.length} goles
+                Mostrando ${filteredData.length} goles
             `;
 
             // Renderizar goles de la página actual

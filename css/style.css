@@ -752,7 +752,11 @@ body.team-portugal {
         padding: 20px 10px;
     }
     .modal-content {
+        height: 75%;
         width: 45dvh;
+    }
+    .video-container{
+        height: 100%;
     }
 
     .filters {
