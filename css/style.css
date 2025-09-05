@@ -815,6 +815,17 @@ body.team-portugal {
     .filters {
         display: none;
     }
+
+    body.team-al-nassr,
+    body.team-juventus,
+    body.team-manchester-united,
+    body.team-real-madrid,
+    body.team-sporting-lisboa,
+    body.team-portugal {
+        background-size: 100%;
+    }
+
+    
 }
 
 @media (max-width: 820px) {
