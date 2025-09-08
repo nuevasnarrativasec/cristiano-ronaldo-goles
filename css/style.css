@@ -149,7 +149,8 @@ body {
             }
                 .goal-teams {
                     color: #0b558e;
-                    font: 1.6rem/1 'Quinn';                    
+                    font: 1.6rem/1 'ramagothicmw01-heavyregular';      
+                    text-transform: uppercase;              
                 }
                 .goal-result{
                     font: 1.5rem/1.2 'Abolition Test Round';
@@ -859,6 +860,11 @@ body.team-portugal {
     font-family: 'druk_wide_mediumregular';
     src: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/fonnts.com-druk_wide_medium-webfont.woff2') format('woff2'),
          url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/fonnts.com-druk_wide_medium-webfont.woff') format('woff');
+}
+@font-face {
+    font-family: 'ramagothicmw01-heavyregular';
+    src: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/rama_gothic_m_w01_heavy-webfont.woff2') format('woff2'),
+         url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/fonts/rama_gothic_m_w01_heavy-webfont.woff') format('woff');
 }
 
 .box-portada {
