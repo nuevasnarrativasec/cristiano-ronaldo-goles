@@ -696,15 +696,25 @@
                 // Crear iframe con el embed de JWPlayer
                 videoContainer.innerHTML = `
                     <iframe 
-                        src="https://cdn.jwplayer.com/players/${goal.codigoJWPlayer}-sfGpVx0W.html" 
+                        src="https://cdn.jwplayer.com/players/${goal.codigoJWPlayer}-sfGpVx0W.html?autoplay=1" 
                         width="100%" 
                         height="400" 
                         frameborder="0" 
                         scrolling="auto" 
                         allowfullscreen
+                        allow="autoplay; fullscreen"
+                        id="jwPlayerFrame"
                         title="Gol ${goal.numero} de Cristiano Ronaldo">
                     </iframe>
                 `;
+                // Intentar reproducir el video después de que cargue el iframe
+                setTimeout(() => {
+                    const iframe = document.getElementById('jwPlayerFrame');
+                    if (iframe && iframe.contentWindow) {
+                        // Enviar comando de play al iframe
+                        iframe.contentWindow.postMessage({command: 'play'}, '*');
+                    }
+                }, 1000);
             }
 
             goalInfo.innerHTML = `
