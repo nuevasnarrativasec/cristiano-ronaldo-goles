@@ -6,46 +6,48 @@
         let currentTeam = 'Portugal';
         let currentFieldPart = 'Dentro del área';
         const GOALS_PER_PAGE = 12; // Número de goles por página
-
-        // Configuración de la API de Google Sheets
-        const SHEET_ID = '1rmq-uovoEXAFFD07h8MSUWfeI2Y7P2wg596PJ4CTceU'; // Sheet ID
-        const API_KEY = 'AIzaSyBiMIQGfjmnqRXpBANVOaK4HCEUp-dx0uw'; // API key
-        const SHEET_NAME = 'Hoja 1'; // Nombre de la hoja
+       
 
         // Función para cargar datos desde Google Sheets
         async function loadGoalsData() {
             try {
-                // URL para acceder a Google Sheets API
-                const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+                const SHEET_ID = '1rmq-uovoEXAFFD07h8MSUWfeI2Y7P2wg596PJ4CTceU';
+                const SHEET_NAME = 'Hoja 1';
+                
+                // URL pública de Google Sheets (sin API key)
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
                 
                 console.log('Cargando datos desde:', url);
                 
                 const response = await fetch(url);
-                const data = await response.json();
+                const text = await response.text();
                 
-                if (data.values && data.values.length > 1) {
-                    // Procesar los datos del sheet con mejor filtrado
-                    const rawData = data.values.slice(1) // Omitir encabezados
-                        .filter(row => row && row.length > 0 && row[0] && row[0].toString().trim() !== '') // Filtrar filas vacías y sin número
+                // Limpiar la respuesta JSONP de Google
+                const jsonString = text.substring(47).slice(0, -2);
+                const data = JSON.parse(jsonString);
+                
+                if (data.table && data.table.rows && data.table.rows.length > 0) {
+                    // Procesar datos de la estructura gviz
+                    const rawData = data.table.rows
+                        .filter(row => row.c && row.c[0] && row.c[0].v) // Filtrar filas válidas
                         .map((row, index) => ({
-                            numero: parseInt(row[0]) || 0,
-                            temporada: row[1] || 'N/A',
-                            fecha: row[2] || 'N/A',
-                            local: row[3] || 'N/A',
-                            resultado: row[4] || 'N/A',
-                            visita: row[5] || 'N/A',
-                            minuto: parseInt(row[6]) || 0,
-                            parteCuerpo: row[7] || 'N/A',
-                            situacion: row[8] || 'N/A',
-                            competicion: row[9] || 'N/A',
-                            codigoJWPlayer: row[10] || '',
-                            numeroGol: row[11] || row[0] || ''
+                            numero: parseInt(row.c[0].v) || 0,
+                            temporada: row.c[1]?.v || 'N/A',
+                            fecha: row.c[2]?.v || 'N/A',
+                            local: row.c[3]?.v || 'N/A',
+                            resultado: row.c[4]?.v || 'N/A',
+                            visita: row.c[5]?.v || 'N/A',
+                            minuto: parseInt(row.c[6]?.v) || 0,
+                            parteCuerpo: row.c[7]?.v || 'N/A',
+                            situacion: row.c[8]?.v || 'N/A',
+                            competicion: row.c[9]?.v || 'N/A',
+                            codigoJWPlayer: row.c[10]?.v || '',
+                            numeroGol: row.c[11]?.v || row.c[0]?.v || ''
                         }))
-                        .filter(goal => goal.numero > 0) // Solo goles con número válido
+                        .filter(goal => goal.numero > 0)
                         .sort((a, b) => b.numero - a.numero);
                     
                     console.log('Datos procesados:', rawData.length, 'goles');
-                    console.log('Números de goles:', rawData.map(g => g.numero).slice(0, 10)); // Ver primeros 10 números
                     
                     goalsData = rawData;
                     filteredData = [...goalsData];
@@ -56,8 +58,7 @@
                 
             } catch (error) {
                 console.error('Error cargando datos:', error);
-                // Usar datos de muestra en caso de error
-                console.log('Usando datos simulados...');
+                // Fallback a datos simulados
                 goalsData = generateSampleData();
                 filteredData = [...goalsData];
                 renderGoals();
