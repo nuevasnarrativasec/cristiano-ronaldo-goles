@@ -328,6 +328,7 @@ body {
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            pointer-events: none;
             transition: all 0.3s ease;
         }
 
@@ -335,6 +336,7 @@ body {
         .calendar-day.has-goals {
             background: white;
             color: #8B0000;
+            pointer-events: inherit;
         }
 
         .minute-slider-container {
