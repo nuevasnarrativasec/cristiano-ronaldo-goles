@@ -9,7 +9,7 @@ body {
     background-image: url('https://nuevasnarrativasec.github.io/cristiano-ronaldo-goles/img/bg-rojo.jpg');
     color: white;    
     font-style: normal;
-    font-display: swap;
+    /*font-display: swap;*/
     min-height: 100vh;    
 
     -webkit-font-smoothing:antialiased;
