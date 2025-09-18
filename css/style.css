@@ -747,6 +747,9 @@ body.team-portugal {
     body .goals-grid{
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
+    #social #wst{
+        display: inline-block;
+    }      
     .goal-number{
         font-size: 6rem;
     }
@@ -799,7 +802,11 @@ body.team-portugal {
 }
 
 @media (max-width: 768px) {
-            
+
+
+    #social #wst{
+        display: inline-block;
+    }        
     .filters {
         padding: 15px 10px;
     }            
@@ -878,6 +885,56 @@ body.team-portugal {
         object-position: top;
         width: 100%;
     }
+    #social{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 600;
+        margin: 0;
+    }
+        #social ul{
+            display: inline-block;
+            margin: 0 auto;
+            padding: 0;
+            vertical-align: middle;
+        }
+            #social ul li{
+                cursor: pointer;
+                display: inline-block;
+                margin: 0 3px;
+                vertical-align: middle;
+            }
+                #social ul li a{
+                    height: 36px;
+                    width: 36px;
+                }
+                    #fb{
+                        background: url(https://d1ts5g4ys243sh.cloudfront.net/proyectos_especiales_prod/especiales-multimedia/personas-desaparecidas/img/fb-icon.png?v2) no-repeat 0 0;
+                        background-size: 100% !important;
+                        border: none;
+                        display: inline-block;
+                        height: 36px;
+                        text-indent: -9999px;
+                        width: 36px;
+                    }
+                    #wst{                
+                        background: url(https://d1ts5g4ys243sh.cloudfront.net/proyectos_especiales_prod/especiales-multimedia/personas-desaparecidas/img/wsp-icon.png?v2) no-repeat 0 0 !important;
+                        background-size: 100% !important;
+                        border: none;
+                        display: none;
+                        height: 36px;
+                        text-indent: -9999px;
+                        width: 36px;
+                    }
+                    #tw{            
+                        background: url(https://d1ts5g4ys243sh.cloudfront.net/proyectos_especiales_prod/especiales-multimedia/personas-desaparecidas/img/tw-icon.png?v2) no-repeat 0 0 !important;
+                        background-size: 100% !important;
+                        border: none;
+                        display: inline-block;
+                        height: 36px;
+                        text-indent: -9999px;
+                        width: 36px;
+                    } 
 
 .filters {
     background: #7d2929;

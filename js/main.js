@@ -14,7 +14,6 @@
                 const SHEET_ID = '1rmq-uovoEXAFFD07h8MSUWfeI2Y7P2wg596PJ4CTceU';
                 const SHEET_NAME = 'Hoja 1';
                 
-                // URL pública de Google Sheets (sin API key)
                 const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
                 
                 console.log('Cargando datos desde:', url);
@@ -22,18 +21,16 @@
                 const response = await fetch(url);
                 const text = await response.text();
                 
-                // Limpiar la respuesta JSONP de Google
                 const jsonString = text.substring(47).slice(0, -2);
                 const data = JSON.parse(jsonString);
                 
                 if (data.table && data.table.rows && data.table.rows.length > 0) {
-                    // Procesar datos de la estructura gviz
                     const rawData = data.table.rows
-                        .filter(row => row.c && row.c[0] && row.c[0].v) // Filtrar filas válidas
+                        .filter(row => row.c && row.c[0] && row.c[0].v)
                         .map((row, index) => ({
                             numero: parseInt(row.c[0].v) || 0,
                             temporada: row.c[1]?.v || 'N/A',
-                            fecha: row.c[2]?.v || 'N/A',
+                            fecha: formatGoogleDate(row.c[2]) || 'N/A', // Formatear fecha correctamente
                             local: row.c[3]?.v || 'N/A',
                             resultado: row.c[4]?.v || 'N/A',
                             visita: row.c[5]?.v || 'N/A',
@@ -58,11 +55,53 @@
                 
             } catch (error) {
                 console.error('Error cargando datos:', error);
-                // Fallback a datos simulados
                 goalsData = generateSampleData();
                 filteredData = [...goalsData];
                 renderGoals();
             }
+        }
+
+        // Función para formatear fechas de Google Sheets
+        function formatGoogleDate(dateCell) {
+            if (!dateCell || !dateCell.v) return 'N/A';
+            
+            // Si ya es un string normal, devolverlo
+            if (typeof dateCell.v === 'string' && !dateCell.v.startsWith('Date(')) {
+                return dateCell.v;
+            }
+            
+            // Si es un objeto Date de Google Sheets
+            if (dateCell.v && typeof dateCell.v === 'string' && dateCell.v.startsWith('Date(')) {
+                try {
+                    // Extraer los números del formato Date(year,month,day)
+                    const dateMatch = dateCell.v.match(/Date\((\d+),(\d+),(\d+)\)/);
+                    if (dateMatch) {
+                        const year = parseInt(dateMatch[1]);
+                        const month = parseInt(dateMatch[2]); // Mes en base 0 (0=enero)
+                        const day = parseInt(dateMatch[3]);
+                        
+                        // Crear fecha y formatear
+                        const date = new Date(year, month, day);
+                        const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                                    'julio', 'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre'];
+                        
+                        return `${day} de ${months[month]} de ${year}`;
+                    }
+                } catch (e) {
+                    console.error('Error formateando fecha:', e);
+                }
+            }
+            
+            // Si es un número (timestamp), convertirlo
+            if (typeof dateCell.v === 'number') {
+                const date = new Date(dateCell.v);
+                const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                            'julio', 'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre'];
+                
+                return `${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()}`;
+            }
+            
+            return dateCell.v || 'N/A';
         }
 
         // Generar datos de muestra basados en tu spreadsheet (orden descendente)
