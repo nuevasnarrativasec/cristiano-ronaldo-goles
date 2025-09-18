@@ -162,6 +162,8 @@
             if (mobileSelect) {
                 mobileSelect.addEventListener('change', function() {
                     const selectedFilter = this.value;
+
+                    document.getElementById('backToCalendar').style.display = 'none';
                     
                     // Trigger el mismo comportamiento que los botones desktop
                     const correspondingBtn = document.querySelector(`[data-filter="${selectedFilter}"]`);
@@ -339,6 +341,8 @@
                 
                 const filter = this.dataset.filter;
                 currentFilter = filter;
+
+                document.getElementById('backToCalendar').style.display = 'none';
                 
                 // Ocultar todos los contenedores especiales
                 document.getElementById('calendarContainer').style.display = 'none';
@@ -421,6 +425,8 @@
         document.getElementById('searchBox').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
             currentPage = 1; // Resetear a la primera página
+
+            document.getElementById('backToCalendar').style.display = 'none';
             
             filteredData = goalsData.filter(goal => {
                 // Si el término de búsqueda es un número, buscar coincidencia exacta en el número de gol
