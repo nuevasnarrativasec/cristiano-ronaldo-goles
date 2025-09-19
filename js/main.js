@@ -626,9 +626,15 @@
             
             // Filtrar goles por equipo
             currentPage = 1;
-            filteredData = goalsData.filter(goal => 
-                goal.local === teamName || goal.visita === teamName
-            );
+            // Caso especial para Sporting Lisboa: solo goles donde jugaba PARA el Sporting
+            if (teamName === 'Sporting Lisboa') {
+                filteredData = goalsData.filter(goal => goal.local === teamName);
+            } else {
+                // Para otros equipos, mostrar donde jugó para ellos o contra ellos
+                filteredData = goalsData.filter(goal => 
+                    goal.local === teamName || goal.visita === teamName
+                );
+            }
             
             // Mostrar goles debajo del selector
             document.getElementById('goalsGrid').style.display = 'grid';
