@@ -626,9 +626,11 @@
             
             // Filtrar goles por equipo
             currentPage = 1;
-            // Caso especial para Sporting Lisboa: solo goles donde jugaba PARA el Sporting
+            // Caso especial para Sporting Lisboa: solo los primeros 5 goles (números 1-5)
             if (teamName === 'Sporting Lisboa') {
-                filteredData = goalsData.filter(goal => goal.local === teamName);
+                filteredData = goalsData.filter(goal => 
+                    goal.numero >= 1 && goal.numero <= 5
+                );
             } else {
                 // Para otros equipos, mostrar donde jugó para ellos o contra ellos
                 filteredData = goalsData.filter(goal => 
